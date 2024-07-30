@@ -1,0 +1,447 @@
+Received: from OS3P286MB2423.JPNP286.PROD.OUTLOOK.COM (::1) by
+ OS0P286MB0595.JPNP286.PROD.OUTLOOK.COM with HTTPS; Mon, 22 Jul 2024 03:32:41
+ +0000
+Received: from SGAP274CA0022.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:b6::34) by
+ OS3P286MB2423.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:155::10) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7784.20; Mon, 22 Jul 2024 03:32:40 +0000
+Received: from SG2PEPF000B66CB.apcprd03.prod.outlook.com
+ (2603:1096:4:b6:cafe::83) by SGAP274CA0022.outlook.office365.com
+ (2603:1096:4:b6::34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7784.20 via Frontend
+ Transport; Mon, 22 Jul 2024 03:32:39 +0000
+Authentication-Results: spf=pass (sender IP is 143.89.14.124)
+ smtp.mailfrom=lists.ust.hk; dkim=fail (body hash did not verify)
+ header.d=ust.hk;dmarc=pass action=none header.from=ust.hk;compauth=pass
+ reason=100
+Received-SPF: Pass (protection.outlook.com: domain of lists.ust.hk designates
+ 143.89.14.124 as permitted sender) receiver=protection.outlook.com;
+ client-ip=143.89.14.124; helo=mx7.ust.hk; pr=C
+Received: from mx7.ust.hk (143.89.14.124) by
+ SG2PEPF000B66CB.mail.protection.outlook.com (10.167.240.24) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.7784.11
+ via Frontend Transport; Mon, 22 Jul 2024 03:32:38 +0000
+Received: from sympa.ust.hk (sympa.ust.hk [143.89.14.70])
+	by mx7.ust.hk (Postfix) with ESMTPS id D6E7780088;
+	Mon, 22 Jul 2024 11:32:24 +0800 (HKT)
+Received: from sympa.ust.hk (localhost [127.0.0.1])
+	by sympa.ust.hk (8.14.4/8.14.4) with ESMTP id 46M3VJuU027443;
+	Mon, 22 Jul 2024 11:31:19 +0800
+Received: (from sympa@localhost)
+	by sympa.ust.hk (8.14.4/8.14.4/Submit) id 46M3VJue027438;
+	Mon, 22 Jul 2024 11:31:19 +0800
+X-Authentication-Warning: sympa.ust.hk: sympa set sender to fast-food-restaurants-news-owner@lists.ust.hk using -f
+Received: from mx6.ust.hk (mx6.ust.hk [143.89.14.41])
+	by sympa.ust.hk (8.14.4/8.14.4) with ESMTP id 46M3U7Tw026960
+	for <fast-food-restaurants-news@lists.ust.hk>; Mon, 22 Jul 2024 11:30:07 +0800
+Received: from TY3P286CU002.outbound.protection.outlook.com (mail-japaneastazon11020112.outbound.protection.outlook.com [52.101.229.112])
+	by mx6.ust.hk (Postfix) with ESMTPS id 8DEAC80031
+	for <fast-food-restaurants-news@lists.ust.hk>; Mon, 22 Jul 2024 11:30:06 +0800 (HKT)
+ARC-Seal: i=2; s=arc-20210208; d=ust.hk; t=1721619007; a=rsa-sha256;
+	cv=pass;
+	b=cEbGARSy0QJrkL/Qd9LNDdggbWApjP/juza5UqUzEQFK5BOHVDYeZ1h7XWvAgZIgg0l36h
+	rCtIxnRbjv58g5de8xkkVEV8Dq4iYuCNT4bWFtWm99Y4jSr9TDeWatKl2T8QzBs3uMyA58
+	GBAh4RaPxlr9nBksho+faBEL6XPKjCwExptWnoCR/w1VbL5rIKsTv/Say71RhZb18Mwo3f
+	GCAle70ufJv1LXISPxa5L8ieHiL1hO7B/YbyQcZ38M74Uj1fWVcZnQGpyWUEgFxYMEKJuW
+	CwfrenBDpoXSozWDF4fYeUoKa6XManvlB0lxbJRfnM1DjskReTWxEloUgHNBQg==
+ARC-Authentication-Results: i=2;
+	mx6.ust.hk;
+	dkim=pass header.d=ust.hk header.s=selector2 header.b=f577wNP1;
+	dmarc=pass (policy=none) header.from=ust.hk;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1");
+	spf=pass (mx6.ust.hk: domain of catering@ust.hk designates 52.101.229.112 as permitted sender) smtp.mailfrom=catering@ust.hk
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=ust.hk;
+	s=arc-20210208; t=1721619007; h=to:subject:message-id:date:from:mime-version;
+	bh=FITqFwi4aSCx1B9C5XTqe9gZMPSVoI0P4WP0IPKIXhM=;
+	b=CHkmUw1ETubALl/MZBXu9K7G8brIExr+/BA+pAlQm9UfMJ//ZsJVi9PAzoBBgOkbRecUDR
+	9IopkNKmmEh2TVPXEzEsMfOrOvMYZ5+qlHtoWcNA+3kn8ViQ6S0+g/6tDNxWtRdvOtRozL
+	0LVgwxYCvi6s9w2TksTcN52V/Td6N7ZjY9/k1LyOi2l7io07r+8tjebtd8DQcw/HOBs67F
+	6iIsHCiej6QFqF5iIVEYOXeXJs+Q31lfE+utkwYhHGJhLO00vFgHCHscO8UqpAi9HDlbrR
+	/bQ4etVazn+Nc9OT3FY2b5cXeYKGgRwDITjebvJ7Z0L1YoH+Dz0Hu0tUNSDlxw==
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=uwogREP5NGQSSXfmfbs4nmgTsnsFuqE0WUmJzoRKs51W26op9RubFO5FnDM9hE8JuN9+rugnnzwnmTEgryZlKwAyFFcpgqm6tSVWNEeOL6u91DASjkv3rzGMez0n54kW3wYaJoTUK1MMHkkcw/IAEeU+1RsA5klUwYn+ATov3C/6HvXsyYt5vI4sUDznX4BiB0VNxTfFt5CZ6NmfOjIAI+U91uBe15GmYVI7yXG2KBPT8vWBxFq4qvfwtAw+QRXFBeef/H5UQDWHS33h8hnd+SiGcyBHYsMIh2wEVAQjdMu0ao8cnUXSoXxLwRM8EtywkYnIJ/d8FGPtYHsU9RHrdw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=FITqFwi4aSCx1B9C5XTqe9gZMPSVoI0P4WP0IPKIXhM=;
+ b=cTgF7dhWQdO3ToSlmAzQGg71DpHGARtQSsyfXmakezOk4VYlKHe8Hs3O4Hhf3x7i1qs8nLrpypxAK39a5c9isyai9CUF47HUQ3X1kRdi9ZkyxQNqzMEP9Mi4hU+YtStiLoXdQOI0S/0G7N49AQrvSmvVGsmUZeqOBvLMirHnkGd/7hf/s9AG8AiG8j4WKblaVXYeM8lQTP9JF8Wtz8KSOKbNpjG8RNTPUj+hVHPjoAh+N0u6g7/p98/eiNsaJeDIKUjecJnysyB6EgOJwsK2GOFH6FBjTP3J7qQmDQWLF2xBf+fSz7p5Yja4EPRrbovfsI0gs3DL47V55e3465ynlg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=ust.hk; dmarc=pass action=none header.from=ust.hk; dkim=pass
+ header.d=ust.hk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ust.hk; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=FITqFwi4aSCx1B9C5XTqe9gZMPSVoI0P4WP0IPKIXhM=;
+ b=f577wNP1AaiwhF7VNCGzhjDvdATTzVeIxbiYkvqX5A7dOEf7Gf09eeGDfeJPFRlBYcJA0NtANs3ZyCoIa+saW2mo+RjM8kDJ7VBEuFpoybo2hoh1lJ+4HYf6i19Z6cTYtDZzIqMCxnEJVWqiZ9bRmuVGVuwNph+yFdqsscsQ0LyaTQZ6IbadBAL8097FwWATd4jcPAlKiUJHMHqgjbzDEOCJcNldfisoKkEDJDwabZ/ycoUt2xZoHtZyJXBSb5wF5uOpPmEMTP0/6EAPJEzj+uupV9paMlrCxwyXck1YxN8wclUCBROxjbhqtgEtSAMusbOVGwluucdZBMcvyY5x3g==
+Received: from TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM (2603:1096:404:8034::13)
+ by OS3P286MB1664.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:161::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7784.20; Mon, 22 Jul
+ 2024 03:30:04 +0000
+Received: from TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::a03a:b3bc:ccbe:41eb]) by TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::a03a:b3bc:ccbe:41eb%4]) with mapi id 15.20.7784.017; Mon, 22 Jul 2024
+ 03:30:04 +0000
+From: Campus Services Office HKUST <catering@ust.hk>
+To: "fast-food-restaurants-news@lists.ust.hk"
+	<fast-food-restaurants-news@lists.ust.hk>
+Subject: Reminder: Reopening of the American Diner
+Thread-Topic: Reminder: Reopening of the American Diner
+Thread-Index: AQHa2+afott5VGFj1USWxtbueV+7/rICFehy
+Date: Mon, 22 Jul 2024 03:30:04 +0000
+Message-ID:
+ <TYAP286MB0508C56AC09BA20F40D9AFFBA4A82@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+References:
+ <TYAP286MB0508AF35A7B53D9BF06FDDF5A49DA@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+ <TYAP286MB0508A6ECF36617DEBF065B14A4F12@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+ <TYAP286MB05089CE5A337F5714735CD5FA4F32@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+ <TYAP286MB05086862576EE2B875EB2002A4FB2@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+ <TYAP286MB0508408B8950B31D34A07B1BA4FB2@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+ <TYAP286MB0508F77E5BDBE413EDC541BFA4FB2@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+ <TYAP286MB0508B7ACBEEEF1A332740D6EA4A52@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+ <TYAP286MB05083C0043EE422E1013566BA4A52@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+ <TYAP286MB050846D467DCE71FB52EBD30A4A52@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+ <TYAP286MB0508769714AB5EDD3007D510A4A52@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+ <TYAP286MB05089704A62A686B51874949A4AD2@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+ <TYAP286MB05081B6A09218B26769EBC30A4AD2@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+ <TYAP286MB05087E38FA54AE9B39C54355A4AD2@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+ <TYAP286MB0508A8A90AAE22CE0A2914BCA4AD2@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+ <TYAP286MB0508BCDACAC1E043362E3858A4AD2@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+ <TYAP286MB050873CF2A2267C835468EDEA4AD2@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+ <TYAP286MB05081F74088C40039346C69FA4A82@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+ <TYAP286MB0508695CC0147AF4670244E1A4A82@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+In-Reply-To:
+ <TYAP286MB0508695CC0147AF4670244E1A4A82@TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM>
+Accept-Language: en-GB, en-US
+Content-Language: en-GB
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+msip_labels:
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=ust.hk;
+x-ms-traffictypediagnostic:
+ TYAP286MB0508:EE_|OS3P286MB1664:EE_|SG2PEPF000B66CB:EE_|OS3P286MB2423:EE_|OS0P286MB0595:EE_
+X-MS-Office365-Filtering-Correlation-Id: 406f4cac-b651-4512-0770-08dca9feeff3
+X-MS-Exchange-AtpMessageProperties: SA|SL
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+X-Microsoft-Antispam-Untrusted:
+ BCL:0;ARA:13230040|1800799024|366016|376014|38070700018;
+X-Microsoft-Antispam-Message-Info-Original:
+ =?us-ascii?Q?b37ayZaJa7Z9ucY16gAsw3vb+259TKzOlCu8aKTbQafGNjKXHXc8QLhLs12C?=
+ =?us-ascii?Q?UR547Mx/hACXWNDMVHP3NsbWQRXWDzJ9HnqgeItDO0dzfpytMwJStQhLTgmR?=
+ =?us-ascii?Q?MJAowYoon1Yh3a2kHNWbi2iZJ56U0NYzzB/d/mE1yJMTTt8cHKSHq/KVN8tX?=
+ =?us-ascii?Q?bhVxsXW/nP+B6eQUHESdsYn7W58TT5qIpGkcECaaGTRKJlMqIj51Sd5dx1C1?=
+ =?us-ascii?Q?rRaRZRAXYcXvKFNq/VqGamcThTtxWlG2LiY4Mm2kCQxNs7TjLcGzM1xxcbre?=
+ =?us-ascii?Q?0nkdarBJz8elTt4XgsoDeLnNzOy0/CGGowPzAMDujbbS419QDJTAKj4ChW7v?=
+ =?us-ascii?Q?4Y3uAu4eHbwJ7VHbUeEWh+DXcYJNJlgajon2EgjN7xb7c+u+aK9qLV6WErBQ?=
+ =?us-ascii?Q?VlYdUmHnqBxP9AjG70aEM21HNz3ToUwHGa6Ci50vTzSVsZ9XY7LW8n6Rkgr6?=
+ =?us-ascii?Q?o+mgZC0U/GILbanfOE0tbpi/83Z2knNkiNvdlNHsDi8MuDW7I9WnpzLnVae7?=
+ =?us-ascii?Q?x3ypqsHyi/aH2VzHhdnYD/PmY8SMRJ4PAutX/NFVpa3V+8GdvVGB43Yp3vOU?=
+ =?us-ascii?Q?d/f5gDmjABgYvzjOlUMZZwZdXma0tU+FV6q5aVy5xG114oTcD+SnSsRoTxsB?=
+ =?us-ascii?Q?9aO+B1f9hM+oLymmXGvw2FTOjfWWkEtl8qgEMwKYfkZJFQF8UKU9Ef3xidSC?=
+ =?us-ascii?Q?dJBClSoPH3Wy9tJlsQIvK2SalTPglchHXPXUHxYUjx+I0wZ5NsO68liuvvn7?=
+ =?us-ascii?Q?3uaADwbGGMW1kCgIIicE3wUcMjo6cIf5ucudMEMClu4HfwJzRq9s9HZh9Rks?=
+ =?us-ascii?Q?OLNt3HWJ3BO8fErDop7tgl8xIB9mzZXnBHP9ObazTDK6GFDiORXrYJgWeUyd?=
+ =?us-ascii?Q?YkGlkMTr0A7uW3gt5U6Vtnh0dwfYMfaw4K81OTDsGpMmPFISBcUnCe0y9Miq?=
+ =?us-ascii?Q?GsHgjd2lqXaJKkUN9rCIRzbTI1FWF0VxnZcVGiRUERBOg6MH2YMM4lBts2hM?=
+ =?us-ascii?Q?4pJEt1FqxS/6mNnmLqasYfkq2mjDnsZnaj+qfVOjXXAa94AHRj/oBjH5xJU2?=
+ =?us-ascii?Q?dl8mYXD8sh+0peoAILj9wMth7qSCkIbwJwXdKypHrUnGg9kpWehKOqYz1zcS?=
+ =?us-ascii?Q?ILPDc8VrX8DrA3hLDIGsmzg0H5BTEvTkJDbIjDudLfnsdrQ6/mMcp2rrHcnB?=
+ =?us-ascii?Q?2ecMmDVa2EZwEEklb7bE5UhsVnv5d1NbZvV7V2P+KBudm6T+jNPpvEhnOBnl?=
+ =?us-ascii?Q?tcZMWrqs70ZkRTOXLUpAHxnmtXlofeJlmbqbw35Jo+dBOveb6va0sDgHdX2/?=
+ =?us-ascii?Q?DnBal/SWosTJtn3Kr+8l5h0lbbkmEyppvDaB7k+p34DgB7gBgGIIOOUQ6X2d?=
+ =?us-ascii?Q?TSET2f8=3D?=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TYAP286MB0508.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(38070700018);DIR:OUT;SFP:1102;
+Content-Type: multipart/alternative;
+	boundary="_000_TYAP286MB0508C56AC09BA20F40D9AFFBA4A82TYAP286MB0508JPNP_"
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS3P286MB1664
+X-Original-DMARC-Record: domain=ust.hk; _dmarc.ust.hk.	3600	IN	TXT	"v=DMARC1;p=none;rua=mailto:ba03758269@rua.easydmarc.us;ruf=mailto:ba03758269@ruf.easydmarc.us;fo=0;"
+Reply-To: Campus Services Office HKUST <catering@ust.hk>
+X-Loop: fast-food-restaurants-news@lists.ust.hk
+X-Sequence: 75
+Errors-to: fast-food-restaurants-news-owner@lists.ust.hk
+Precedence: bulk
+Sender: fast-food-restaurants-news-request@lists.ust.hk
+X-no-archive: yes
+List-Id: <fast-food-restaurants-news.lists.ust.hk>
+List-Help: <mailto:sympa@lists.ust.hk?subject=help>
+List-Subscribe: <mailto:sympa@lists.ust.hk?subject=subscribe%20fast-food-restaurants-news>
+List-Unsubscribe: <mailto:sympa@lists.ust.hk?subject=unsubscribe%20fast-food-restaurants-news>
+List-Post: <mailto:fast-food-restaurants-news@lists.ust.hk>
+List-Owner: <mailto:fast-food-restaurants-news-request@lists.ust.hk>
+Return-Path: fast-food-restaurants-news-owner@lists.ust.hk
+X-MS-Exchange-Organization-ExpirationStartTime: 22 Jul 2024 03:32:39.2236
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id:
+ 406f4cac-b651-4512-0770-08dca9feeff3
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Organization-MessageDirectionality: Originating
+X-MS-Exchange-SkipListedInternetSender: ip=[143.89.14.124];domain=mx7.ust.hk
+X-MS-Exchange-ExternalOriginalInternetSender:
+ ip=[143.89.14.124];domain=mx7.ust.hk
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ SG2PEPF000B66CB.apcprd03.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Exchange-Organization-AuthSource:
+ SG2PEPF000B66CB.apcprd03.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-OriginatorOrg: hkustconnect.onmicrosoft.com
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+ 74598f1c-975c-4b30-f850-08dca9fe93da
+X-MS-Exchange-Organization-SCL: -1
+X-MS-Exchange-Organization-BypassClutter: true
+X-Microsoft-Antispam:
+ BCL:0;ARA:13230040|35042699022|5062899012|4022899009|3092899012|2092899012|3072899012|82310400026|12012899012;
+X-Forefront-Antispam-Report:
+ CIP:143.89.14.124;CTRY:HK;LANG:en;SCL:-1;SRV:;IPV:NLI;SFV:SKN;H:mx7.ust.hk;PTR:mx7.ust.hk;CAT:NONE;SFS:(13230040)(35042699022)(5062899012)(4022899009)(3092899012)(2092899012)(3072899012)(82310400026)(12012899012);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jul 2024 03:32:38.9893
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 406f4cac-b651-4512-0770-08dca9feeff3
+X-MS-Exchange-CrossTenant-Id: 6c1d4152-39d0-44ca-88d9-b8d6ddca0708
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=6c1d4152-39d0-44ca-88d9-b8d6ddca0708;Ip=[143.89.14.124];Helo=[mx7.ust.hk]
+X-MS-Exchange-CrossTenant-AuthSource:
+ SG2PEPF000B66CB.apcprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS3P286MB2423
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:02.8098605
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.7784.015
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910001)(944506478)(944626604)(920097)(930097)(140003)(1420198);
+X-Microsoft-Antispam-Message-Info:
+	=?iso-8859-1?Q?gF7PdeVT+07dehXrLuQDUy887Lbazb/LIFgTtPVngLvKYaOffwXVatwsTt?=
+ =?iso-8859-1?Q?SFsyZgm5XljWkHmKIRpSUtQyHmkms87t/+z6P+Hzn9jshRsAnTI3Lu7IX6?=
+ =?iso-8859-1?Q?slPoE/DVSSQTmvU2OFjQfQZlGOcFWpEa46SqGZQThChCnDMUz/DLGnJKlZ?=
+ =?iso-8859-1?Q?nRoD40Y9OjGk3qTxN+cWG1Sg2F7iBUDFAWaujmpf9vcHFUMc125BWY4wUl?=
+ =?iso-8859-1?Q?XeQ9rFT/MRTH7VWBu8OM+gCQxPgegcGpVA/kyxO7V6K5PtGTijoL5fj+bR?=
+ =?iso-8859-1?Q?s7jco5mtMQNpkuWnvoLne0IF9PvCEkUs54DUj89wnS5Yc92pfw0wEea8uh?=
+ =?iso-8859-1?Q?CkkKfKPj2onBXELT89lvBqsG2RmVEdm+5ZC1VLStzW78f5KHEg14y6Cqk+?=
+ =?iso-8859-1?Q?vODm46spTVJ8dSJbU6LG9SqF0eAYh00zX6ul0GRnbApvXLZp2XzvQeO7Yp?=
+ =?iso-8859-1?Q?KQXaw4zT3EWLX50+FtFAmgL6TQgPIQAMyRDf7TRbO7weCrGM3qmnJ5suRH?=
+ =?iso-8859-1?Q?x1qPQOlUbpxtIeUHHzTmf7807RBRw+/ksaEurnVKydhr+q+ukt8sfPzayA?=
+ =?iso-8859-1?Q?d/jwfteCx7Ix4hqSTz2EPgunqjIEUBoCtDm9KHBQ+CJZmyBUIarlZhyI0l?=
+ =?iso-8859-1?Q?RhkZap2nwdpRMl5CVZF4JRo0B/PVSSXFNAC9e83bqNDhhx37e5zUkrrcH0?=
+ =?iso-8859-1?Q?znUDY9VyaO6q3i/IAGEUmXUZjjkOp1B51c0m8cdrjMMP+Ew+a8Ix7/88fg?=
+ =?iso-8859-1?Q?7RH2252beY6xDTrr80NwhPyD71ox3Ajz3ld7b09pwjW4WEDBc4C7Gtjq91?=
+ =?iso-8859-1?Q?nefNckeCi39ITb1VxAXU5yeqTOPHoOP5YaXt+P+ZWmlyN+tApj5FaqWYJ3?=
+ =?iso-8859-1?Q?WPgHjIOBkQaZmZa9FVozwPw3FfxntaEMc9+NK2LqeoR+sS9JYuw1FT4HoP?=
+ =?iso-8859-1?Q?iHwqslbISF4q8OJk7M5zHzkJvEwHR+jfjhrSa5jmcosYspvJABR1iX4jxJ?=
+ =?iso-8859-1?Q?dBTSxpyoPlWqGMexRB9mRVFzLiX4uuzrmo+/iKGIJ9zrxeESB9zgI7KiUI?=
+ =?iso-8859-1?Q?1kYGfpwaiURrmvqiUn8+Mexz/OD5+joO/W+QoLThWOug1hOCJ5bbkEX/NW?=
+ =?iso-8859-1?Q?jbLI4ufeY/1sFmeLI0FEGa6R0C+qMdVolrDt+fe3i7SK6khuLe9ZPuxZhZ?=
+ =?iso-8859-1?Q?odvqF8Q9xGBkrHJ8l4uORjQ0na43Wpam6zxD3Xb24SDvX9A2fytB7B/ydR?=
+ =?iso-8859-1?Q?9fagKYZm9QyDhg8/Te6WaBhaMpr60sABquX3LgIUXzqqu7vjqZ6zgAxCFa?=
+ =?iso-8859-1?Q?fHXjCf/VoLb0zQQlbJDvZ3MlokMuY+AEAGTDHjdxDtHfM1oBgJSun73muH?=
+ =?iso-8859-1?Q?7mjeKzeIKlfzVKqHb2aPp7dFSCRUFtogfG7/lbOkUuLUuXEGrYYLwfLVoJ?=
+ =?iso-8859-1?Q?QMX0kl9gn3QLNZDsrIaxDdMQdVAO2xvkdaMNDUaT8hjYosBGn4hIOUnw0A?=
+ =?iso-8859-1?Q?kacO9x6bqn6colt2YoalKR4yCdIOrm6Va3MDYeOnkR2n4GK6Jfb4Glsyh1?=
+ =?iso-8859-1?Q?ajQ7H9FF8ZU0hu6zcu+IR9Tp+nNIWQsR1gXZQ+TxglEyfla+3KBIz+Fts8?=
+ =?iso-8859-1?Q?SIMz8PhAeTK9zPEGkthezlgXOdUBbIz1HbGdysQEuKFOzG61/25auHGtHw?=
+ =?iso-8859-1?Q?fp84DeDoehUNn975mE936rDgfbV2CGtA0rMZ34/i6tcl/9+UE2t6TgVsCj?=
+ =?iso-8859-1?Q?BdicV9eYyGGbp3vsJOyTItYbJx5Rr8ray8WYBbVgUcF0gKfORt+6QpuPI+?=
+ =?iso-8859-1?Q?3PQWFiTrUB0yahQ0x1It9/fY+zzAkr14RWRoNfX4J21SM9PdloTR9EqGSc?=
+ =?iso-8859-1?Q?fWNQsCTziKH5M0qSxvTcSsHFzxjmjIebdCLTgoPedvkGph1GhfoPvH29vp?=
+ =?iso-8859-1?Q?HyGIM+kodPH+h5RZwnYGQoa6I0h+XM3Hq2+ZUoyjzHuQGJyNJo1DCS4hUa?=
+ =?iso-8859-1?Q?rTw4UJN1Qtcln/0hL/stBcVaVjJ91ayHusDpuuu97ISX7Sw4y2DylactM+?=
+ =?iso-8859-1?Q?82uWrjMUYteBXHgefXQImEyB68lgVyJpIrwTgK1RkooDfa4rCAoYiIyy4K?=
+ =?iso-8859-1?Q?CC8umJ0dbpZZiWW6n2Q3W9m4WPx0qEomfjUsDyzEhMYnmi2njFw8emGdjU?=
+ =?iso-8859-1?Q?9mG5ZFQXVfv178LUEHy3Qm0XSJcsz1R/KISI1GN3ube3YTI9eQP6q+LMVy?=
+ =?iso-8859-1?Q?+aRj8EPTbLREwMU/KPu8w/QrRXSPTTYwWuYXUTu8IWemIxOhUrLCDls0Ql?=
+ =?iso-8859-1?Q?7aRUF4pObnjrRtx/4vC4DHfnN6OIZ9FZCSl6WiWkDtx1wa9bOZUbk0ZvBw?=
+ =?iso-8859-1?Q?=3D=3D?=
+MIME-Version: 1.0
+
+--_000_TYAP286MB0508C56AC09BA20F40D9AFFBA4A82TYAP286MB0508JPNP_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+
+
+If you cannot view this message, please click here<https://cso.ust.hk/Remin=
+der%3A%20Reopening%20of%20the%20American%20Diner>.
+
+________________________________
+Reminder: Reopening of the American Diner
+________________________________
+
+
+
+A kind reminder that the American Diner has reopened. With the upgrade of s=
+ome kitchen equipment, the operator will be able to strengthen his services=
+ by offering more hot meal options for lunch every weekday. This includes t=
+he addition of two Indian curry dishes and one vegetarian dish at the initi=
+al stage of reopening.
+
+Please visit the outlet to try the new dishes or enjoy the classic American=
+ diner favorites<https://cso.ust.hk/sites/cso862-prod.sites2.ust.hk/files/A=
+mericanDiner%20Menu_Eng_Chin_2024-07-22-2.pdf>.
+
+________________________________
+
+--------------------------------------------------------
+
+Please do not reply to this email message.
+
+--------------------------------------------------------
+
+
+
+
+
+
+To unsubscribe from this communication, please visit webpage: https://myacc=
+ount.ust.hk/refreshable_lists=
+
+--_000_TYAP286MB0508C56AC09BA20F40D9AFFBA4A82TYAP286MB0508JPNP_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1"><style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin=
+-bottom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div id=3D"appendonsend">
+<div style=3D"font-family: Calibri, sans-serif; font-size: 11pt; color: rgb=
+(0, 0, 0);">
+<br>
+</div>
+</div>
+<div id=3D"x_appendonsend"></div>
+<div id=3D"x_x_x_x_divRplyFwdMsg" dir=3D"ltr" class=3D"x_x_x_elementToProof=
+"></div>
+<div id=3D"x_x_x_x_x_divRplyFwdMsg" dir=3D"ltr"></div>
+<div id=3D"x_x_x_x_x_x_appendonsend">
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+</div>
+<div id=3D"x_x_x_x_x_x_x_x_x_x_x_x_x_x_appendonsend" class=3D"x_x_x_x_x_x_x=
+_x_x_x_x_elementToProof x_x_x_x_x_x_x_x_x_elementToProof x_x_x_x_x_x_x_x_el=
+ementToProof x_x_x_x_x_x_x_elementToProof">
+</div>
+<div id=3D"x_x_x_x_x_x_x_x_x_x_x_x_x_x_divRplyFwdMsg" dir=3D"ltr"></div>
+<div id=3D"x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_divRplyFwdMsg" dir=3D"ltr" cla=
+ss=3D"x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_elementToProof">
+</div>
+<div style=3D"direction: ltr; font-family: Aptos, Aptos_EmbeddedFont, Aptos=
+_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb=
+(0, 0, 0);" class=3D"elementToProof" align=3D"center">
+If you cannot view this message, please click <a href=3D"https://cso.ust.hk=
+/Reminder%3A%20Reopening%20of%20the%20American%20Diner" id=3D"OWA9c1fee0e-c=
+983-5ebb-4011-a51f4b1c69cb" class=3D"OWAAutoLink" title=3D"https://cso.ust.=
+hk/Reminder%3A%20Reopening%20of%20the%20American%20Diner" data-auth=3D"NotA=
+pplicable">
+here</a>.</div>
+<div style=3D"direction: ltr; font-family: Aptos, Aptos_EmbeddedFont, Aptos=
+_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb=
+(0, 0, 0);" align=3D"center">
+<br>
+</div>
+<div align=3D"center">
+<table style=3D"direction: ltr; width: 90%;" align=3D"center">
+<tbody>
+<tr>
+<td style=3D"direction: ltr; width: 803.297px; height: 313.812px;">
+<hr style=3D"direction: ltr; background-color: rgb(136, 164, 140); height: =
+10px;">
+<h2 style=3D"direction: ltr; text-align: left; text-indent: 0px; line-heigh=
+t: 34px; margin: 15px auto;">
+<span style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService,=
+ Calibri, Helvetica, sans-serif; font-size: 16pt; color: rgb(0, 0, 0);">Rem=
+inder: Reopening of the American Diner</span></h2>
+<hr style=3D"direction: ltr; background-color: rgb(136, 164, 140); height: =
+3px;">
+<p style=3D"direction: ltr; margin-top: 0px; margin-bottom: 0px;">&nbsp;</p=
+>
+<p style=3D"direction: ltr; text-indent: 0px; margin: 0px;" align=3D"justif=
+y"><span style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontServi=
+ce, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">=
+A kind reminder that the American Diner
+ has reopened. With the upgrade of some kitchen equipment, the operator wil=
+l be able to strengthen his services by offering more hot meal options for =
+lunch every weekday. This includes the addition of two Indian curry dishes =
+and one vegetarian dish at the initial
+ stage of&nbsp;reopening.</span></p>
+<div style=3D"direction: ltr; margin-top: 1em; margin-bottom: 1em; font-fam=
+ily: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sa=
+ns-serif; font-size: 12pt; color: rgb(0, 0, 0);">
+Please visit the outlet to try the&nbsp;new dishes&nbsp;or enjoy the classi=
+c <a href=3D"https://cso.ust.hk/sites/cso862-prod.sites2.ust.hk/files/Ameri=
+canDiner%20Menu_Eng_Chin_2024-07-22-2.pdf" id=3D"OWA013d2c4c-bcd3-4f04-2334=
+-8671cc802c6d" title=3D"https://cso.ust.hk/sites/cso862-prod.sites2.ust.hk/=
+files/AmericanDiner%20Menu_Eng_Chin_2024-07-22-2.pdf" data-auth=3D"NotAppli=
+cable" class=3D"OWAAutoLink">
+American diner favorites</a>.</div>
+<div style=3D"direction: ltr; font-family: Aptos, Aptos_EmbeddedFont, Aptos=
+_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb=
+(0, 0, 0);">
+<br>
+</div>
+<hr style=3D"direction: ltr; background-color: rgb(136, 164, 140); height: =
+10px;">
+</td>
+</tr>
+</tbody>
+</table>
+<div style=3D"direction: ltr; font-family: Aptos, Aptos_EmbeddedFont, Aptos=
+_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb=
+(0, 0, 0);">
+<br>
+</div>
+<div style=3D"direction: ltr; font-family: Aptos, Aptos_EmbeddedFont, Aptos=
+_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb=
+(0, 0, 0);">
+--------------------------------------------------------</div>
+<div style=3D"direction: ltr; font-family: Aptos, Aptos_EmbeddedFont, Aptos=
+_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb=
+(0, 0, 0);" align=3D"center">
+<br>
+</div>
+<div style=3D"direction: ltr; font-family: Aptos, Aptos_EmbeddedFont, Aptos=
+_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb=
+(0, 0, 0);" align=3D"center">
+Please do not reply to this email message.</div>
+<div style=3D"direction: ltr; font-family: Aptos, Aptos_EmbeddedFont, Aptos=
+_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb=
+(0, 0, 0);" class=3D"elementToProof">
+<br>
+</div>
+<div style=3D"direction: ltr; font-family: Aptos, Aptos_EmbeddedFont, Aptos=
+_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb=
+(0, 0, 0);">
+--------------------------------------------------------</div>
+<div style=3D"direction: ltr;">&nbsp;</div>
+</div>
+<div align=3D"center">
+<div tabindex=3D"-1" class=3D"x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_ulb23 x_x=
+_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_GNqVo x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_=
+yxtKT x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_allowTextSelection x_x_x_x_x_x_x_=
+x_x_x_x_x_x_x_x_x_x_x_OuGoX" id=3D"x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_x_Uniq=
+ueMessageBody">
+</div>
+<div style=3D"direction: ltr;"><br>
+</div>
+</div>
+<div style=3D"direction: ltr;" align=3D"center"><br>
+</div>
+<div style=3D"direction: ltr;" align=3D"center"><br>
+</div>
+<div style=3D"direction: ltr;" align=3D"center"><br>
+</div>
+<div style=3D"direction: ltr;" align=3D"center"><br>
+</div>
+</body>
+</html>
+<div style=3D"background: transparent; border: none; clear: both; display: =
+block; float: none; position: static">To unsubscribe from this communicatio=
+n, please visit webpage: https://myaccount.ust.hk/refreshable_lists</div></=
+body>=
+
+--_000_TYAP286MB0508C56AC09BA20F40D9AFFBA4A82TYAP286MB0508JPNP_--
